@@ -1,24 +1,33 @@
-# README
+# LINK
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+個人での予定管理に加え、集団での予定を管理できるサイトです
 
-Things you may want to cover:
 
-* Ruby version
+個人でカレンダーに予定を記入しスケジュールを管理するのはもちろんのこと、ユーザー同士でグループを作ることによってお互いに予定を共有し他のユーザーと予定を合わせることも可能となっています  
+これによって他人と予定を合わせる際の面倒臭さや時間を減らし、快適にできればと思い作成しました  
+予定の管理はプライバシーへの配慮として公開・非公開が設定できるので、個人的な予定も問題なく追加できます
 
-* System dependencies
+### サイトテーマ
+予定を共有を快適に、簡潔に。
 
-* Configuration
+### テーマを選んだ理由
+前職でものづくりをしていた経験や、普段の生活の中で、予定を他人と共有できれば、仕事や遊びがスムーズにできたらといいなという思いがあったため
 
-* Database creation
+### ターゲットユーザ
+個人または複数人でのスケジュール管理を要するユーザー
 
-* Database initialization
+### 主な利用シーン
+個人 - カレンダーにスケジュールを記入することで自身の予定を管理  
+仕事 - スケジュールを共有し納期やイベントを全体で管理  
+趣味 - スケジュールを共有し日程や予定を調整
 
-* How to run the test suite
+## 機能一覧
+https://docs.google.com/spreadsheets/d/1TC4aDFt2lCVz36flZbNzn8pLtpADJWikC5sNb_a1KJ0/edit#gid=941988952
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
