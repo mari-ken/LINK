@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  start: 2021-05-11 03:19:03
+  end: 2021-05-11 03:19:03
+  color: MyString
+  allday: false
+  image_id: MyString
+
+two:
+  title: MyString
+  start: 2021-05-11 03:19:03
+  end: 2021-05-11 03:19:03
+  color: MyString
+  allday: false
+  image_id: MyString
