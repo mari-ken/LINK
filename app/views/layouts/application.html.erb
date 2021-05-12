@@ -25,6 +25,7 @@
             <ul class="navbar-nav ml-auto">
               <span class="navbar-text ml-auto">ようこそ、<%= current_user.name %>さん！</span>
               <li><%= link_to "マイページ", user_path(current_user.id), class: 'nav-link text-dark' %></li>
+              <li><%= link_to "ルーム", rooms_path, class: 'nav-link text-dark' %></li>
               <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %></li>
             </ul>
           </div>

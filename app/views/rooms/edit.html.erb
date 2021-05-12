@@ -1,0 +1,21 @@
+<h2>ルーム情報編集 </h2>
+  <% if @room.errors.any? %>
+    <%= @room.errors.count %>件のエラーが発生しました
+    <% @room.errors.full_messages.each do |message| %>
+      <%= message %>
+      <% end %>
+  <% end %>
+  <%= form_with model: @room, local: true do |f| %>
+    <div class="field">
+      <%= f.label :名前 %><br />
+      <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+    </div>
+
+    <%= attachment_image_tag @room, :image, :fill, 60, 60, fallback: "no_image.jpg"%>
+      <label for="inputImage">ProfileImage</label>
+    <%= f.attachment_field :image, placeholder: "プロフィール画像" %>
+
+    <div class="actions">
+      <%= f.submit "保存c" %>
+    </div>
+  <% end %>
