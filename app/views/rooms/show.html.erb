@@ -1,0 +1,31 @@
+<div class="container-fluid"></div>
+  <div class="row">
+  <div class="col-xl-2 room_li">
+    <h2>メンバー一覧</h2>
+    <table class="table">
+      <% @room.users.each do |user| %>
+        <tr>
+          <td><%= attachment_image_tag user, :image, format: 'jpeg', fallback: "no_image.jpg", size:'50x50' %></td>
+          <td><%= user.name %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div class="col-xl-10 event_li">
+    <p><%= "ルーム名：" + @room.name %></p>
+    <%= link_to "ルーム編集", edit_room_path(@room.id) %>
+
+    <%= form_with model: @chat do |f| %>
+      <%= f.text_field :message %>
+      <%= f.hidden_field :room_id %>
+      <%= f.submit %>
+    <% end %>
+
+    <div>
+      <% @chats.each do |chat| %>
+        <p><%= chat.message %></p>
+      <% end %>
+    </div>
+  </div>
+</div>
