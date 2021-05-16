@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 2021_05_12_030742) do
     t.string "color"
     t.boolean "allday"
     t.string "image_id"
+    t.integer "user_id"
+    t.integer "room_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

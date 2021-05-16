@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
   def show
-    @user = User.find(params[:id])
-
+    @user = current_user
     @event = Event.new
-    @events = Event.all
+    @events = current_user.events.order(start: :asc)
   end
 
   def edit
