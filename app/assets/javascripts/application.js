@@ -47,8 +47,11 @@ $(function () {
           right: 'month,agendaWeek,agendaDay'
         },
         events: '/events.json',
+        displayEventTime: false,
         select: function(startDate, endDate) {
           $('#new_event').modal('show');
+          $(".input-start").val(moment(startDate).format("YYYY-MM-DD HH:mm"));
+          $(".input-end").val(moment(endDate).format("YYYY-MM-DD HH:mm"));
         }
       });
     }

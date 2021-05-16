@@ -1,11 +1,22 @@
 <div class="container-fluid"></div>
   <div class="row h-100">
     <div class="col-xl-2">
+      <!-- ユーザー情報 -->
+      <%= attachment_image_tag current_user, :image, format: 'jpeg', fallback: "no_image.jpg", size:'120x120' %>
       <%= link_to "ユーザー情報編集", edit_user_path(@user), class: "btn btn-success" %>
     </div>
 
     <div class="col-xl-3 room_li">
       <h2>予定一覧</h2>
+      <table class="table">
+      <% @events.each do |event| %>
+        <tr>
+          <td><%= l event.start %> ~ <%= l event.end %></td>
+          <td><%= event.title %></td>
+          <td><%= link_to "削除", event_path(event), method: :delete %></td>
+        </tr>
+      <% end %>
+      </table>
     </div>
 
     <div class="col-xl-7">
@@ -35,13 +46,14 @@
                     <div class="form-group">
                       <%= f.label :start, "開始時間", class: "form-control-label"%>
                       <div class="input-group" data-target-input="nearest">
-                        <%= f.text_field :start, class: "form-control"%>
+                        <%= f.text_field :start, class: "form-control input-start"%>
                       </div>
                     </div>
+
                     <div class="form-group">
                       <%= f.label :end, "終了時間", class: "form-control-label"%>
                       <div class="input-group" data-target-input="nearest">
-                        <%= f.text_field :end, class: "form-control"%>
+                        <%= f.text_field :end, class: "form-control input-end"%>
                       </div>
                     </div>
                   </div>
