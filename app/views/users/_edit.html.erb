@@ -1,0 +1,41 @@
+<nav class="navbar navbar-light bg-light">
+  <span class="navbar-text">
+    ユーザー情報編集
+  </span>
+</nav>
+
+<div class="mypage-center">
+  <% if user.errors.any? %>
+    <%= user.errors.count %>件のエラーが発生しました
+    <% user.errors.full_messages.each do |message| %>
+      <%= message %>
+    <% end %>
+  <% end %>
+
+  <%= form_with model: user, local: true do |f| %>
+    <%= f.label :アイコン %><br />
+    <%= attachment_image_tag user, :image, fallback: "no_image.jpg", size:'120x120', class: "icon-edit" %><br />
+    <%= f.attachment_field :image, placeholder: "プロフィール画像", class: "icon-edit" %>
+
+    <div class="field">
+      <%= f.label :名前 %><br />
+      <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-field" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :メールアドレス %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-field" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :パスワード %><br />
+      <%= f.email_field :password, autofocus: true, autocomplete: "password", class: "form-field" %>
+    </div>
+
+    <%= f.submit "保存", class: "btn btn-dark btn-lg rounded-pill col-12 create-btn" %>
+  <% end %>
+
+  <div class="actions">
+    <%= link_to "退会する" %>
+  </div>
+</div>

@@ -4,3 +4,4 @@ $('#calendar').fullCalendar(
   true
 );
 $('.modal').modal('hide');
+$("#list-events").html("<%= j(render 'users/event', events: @events) %>");

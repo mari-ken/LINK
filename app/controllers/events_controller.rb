@@ -7,6 +7,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.user_id = current_user.id
     @event.save
+    @events = current_user.events.order(start: :asc)
   end
 
   def destroy

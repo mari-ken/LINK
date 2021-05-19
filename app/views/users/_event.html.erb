@@ -1,0 +1,15 @@
+<nav class="navbar navbar-light bg-light">
+  <span class="navbar-text">
+    予定一覧
+  </span>
+</nav>
+
+<table class="table">
+  <% events.each do |event| %>
+    <tr>
+      <td><%= l event.start %> ~ <%= l event.end %></td>
+      <td><%= event.title %></td>
+      <td><%= link_to "削除", event_path(event), method: :delete, remote: true %></td>
+    </tr>
+  <% end %>
+</table>

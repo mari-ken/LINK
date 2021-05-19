@@ -1,25 +1,34 @@
-<div class="container-fluid"></div>
+<div class="container-fluid">
   <div class="row h-100">
-    <div class="col-xl-2">
+    <div class="col-xl-2" style="padding:0 0 0 60px">
       <!-- ユーザー情報 -->
-      <%= attachment_image_tag current_user, :image, format: 'jpeg', fallback: "no_image.jpg", size:'120x120' %>
-      <%= link_to "ユーザー情報編集", edit_user_path(@user), class: "btn btn-success" %>
+      <div class="mx-auto">
+        <%= attachment_image_tag current_user, :image, format: 'jpeg', fallback: "no_image.jpg", size:'120x120', class: "user-image" %>
+        <p class="my_name">
+          <%= current_user.name %><br />
+          ID:<%= current_user.public_uid %>
+        </p>
+        <div class="list-group list-group-flush" id="list-tab" role="tablist">
+          <a class="list-group-item list-group-item-action active" data-toggle="list" href="#list-edit" role="tab">ユーザー情報編集</a>
+          <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-events">予定一覧</a>
+          <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-follow">フォロー</a>
+          <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-follower">フォロワー</a>
+          <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-users">ユーザー検索</a>
+        </div>
+      </div>
     </div>
 
-    <div class="col-xl-3 room_li">
-      <h2>予定一覧</h2>
-      <table class="table">
-      <% @events.each do |event| %>
-        <tr>
-          <td><%= l event.start %> ~ <%= l event.end %></td>
-          <td><%= event.title %></td>
-          <td><%= link_to "削除", event_path(event), method: :delete %></td>
-        </tr>
-      <% end %>
-      </table>
+    <div class="col-xl-4 room_li" style="padding:0">
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="list-edit"><%= render 'users/edit', user: @user %></div>
+        <div class="tab-pane fade" id="list-events"><%= render 'users/event', events: @events %></div>
+        <div class="tab-pane fade" id="list-follow"><%= render 'users/followings', followings: @followings %></div>
+        <div class="tab-pane fade" id="list-follower"><%= render 'users/followers', followers: @followers %></div>
+        <div class="tab-pane fade" id="list-users"><%= render 'users/users', users: @users %></div>
+      </div>
     </div>
 
-    <div class="col-xl-7">
+    <div class="col-xl-6">
       <h2>カレンダー</h2>
       <div id="calendar"></div>
 

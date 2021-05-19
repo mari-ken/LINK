@@ -34,10 +34,12 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
 
       t.string :name
       t.string :image_id
+      t.string :public_uid
 
       t.timestamps null: false
     end
 
+    add_index :users, :public_uid,           unique: true
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true

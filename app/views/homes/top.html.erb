@@ -1,12 +1,14 @@
-<div class="container-fluid"></div>
-  <div class="row">
-  <div class="col-xl-7 room_li">
+<div class="container-fluid h-100 top">
+  <div class="row h-100">
+    <div class="col-xl-7 kv">
+    </div>
 
-  </div>
-
-  <div class="col-xl-5 event_li">
-    <%= link_to "新規登録", new_user_registration_path, class: 'btn btn-primary' %>
-      <%= link_to "ログイン", new_user_session_path, class: 'btn btn-primary' %>
-  </div>
+    <div class="col-xl-5 d-flex align-items-center top-right">
+      <div style="margin:0 10px">
+        <div class="theme"><span>予定の作成・共有を簡単に、快適に。</span></div>
+        <div><%= link_to "アカウント作成", new_user_registration_path, class: 'btn btn-dark btn-lg rounded-pill col-6 signup-btn' %></div>
+        <div><%= link_to "ログイン", new_user_session_path, class: 'btn btn-outline-dark btn-lg rounded-pill col-6 signin-btn' %></div>
+      </div>
+    </div>
   </div>
 </div>
