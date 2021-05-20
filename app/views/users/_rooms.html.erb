@@ -1,0 +1,17 @@
+<nav class="navbar navbar-light bg-light">
+  <span class="navbar-text">
+    ルーム一覧
+  </span>
+</nav>
+
+<div class="room-create-btn">
+    <div style="margin-right:10px"><img src="assets/images/no_image.jpg" class="new-room-icon"></img></div>
+    <div class="room-name"><%= link_to "ルーム作成", new_room_path %></div>
+</div>
+
+<% rooms.each do |room| %>
+<div class="user-list">
+    <div style="margin-right:10px"><%= attachment_image_tag room, :image, format: 'jpeg', fallback: "no_image.jpg", size:'50x50' %></div>
+    <div class="room-name"><%= link_to room.name, room_path(room.id) %></div>
+</div>
+<% end %>

@@ -1,18 +1,18 @@
-<div class="container-fluid"></div>
-  <div class="row">
-  <div class="col-xl-2 room_li">
+<div class="room-page">
+  <div class="left-boxx">
     <h2>メンバー一覧</h2>
-    <table class="table">
-      <% @room.users.each do |user| %>
-        <tr>
-          <td><%= attachment_image_tag user, :image, format: 'jpeg', fallback: "no_image.jpg", size:'50x50' %></td>
-          <td><%= user.name %></td>
-        </tr>
-      <% end %>
-    </table>
+    <% @room.users.each do |user| %>
+      <div class="user-list">
+        <div style="margin-right:10px"><%= attachment_image_tag user, :image, format: 'jpeg', fallback: "no_image.jpg", size:'50x50' %></div>
+        <div>
+          <div class="user-info"><%= user.name %></div>
+          <div style="color: #6e767d">ID:<%= user.public_uid %></div>
+        </div>
+      </div>
+    <% end %>
   </div>
 
-  <div class="col-xl-4 event_li">
+  <div class="center-boxx">
     <p><%= "ルーム名：" + @room.name %></p>
     <%= link_to "ルーム編集", edit_room_path(@room.id) %>
 
@@ -29,7 +29,7 @@
     </div>
   </div>
 
-  <div class="col-xl-6">
+  <div class="right-boxx">
       <h2>カレンダー</h2>
       <div id="calendar"></div>
 
@@ -76,4 +76,5 @@
           </div>
         </div>
       </div>
+</div>
 </div>

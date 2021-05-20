@@ -4,12 +4,12 @@
   </span>
 </nav>
 
-<table class="table">
-  <% events.each do |event| %>
-    <tr>
-      <td><%= l event.start %> ~ <%= l event.end %></td>
-      <td><%= event.title %></td>
-      <td><%= link_to "削除", event_path(event), method: :delete, remote: true %></td>
-    </tr>
-  <% end %>
-</table>
+<% events.each do |event| %>
+  <div class="my-events">
+    <div>
+      <div><%= event.title %></div>
+      <div style="color: #6e767d"><%= l event.start %> ~ <%= l event.end %></div>
+    </div>
+    <div class="event-destroy"><%= link_to " 削除", event_path(event), method: :delete, remote: true, class: "far fa-trash-alt event-destroy", style: "color: #f00;" %></div>
+  </div>
+<% end %>
