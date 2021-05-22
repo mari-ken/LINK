@@ -10,9 +10,9 @@ class RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
-    @chats = @room.chats
+    @event = Event.new(room_id: @room.id)
     @chat = Chat.new(room_id: @room.id)
-    @event = Event.new
+    @chats = @room.chats
   end
 
   def create
