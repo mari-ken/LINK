@@ -104,6 +104,8 @@ GEM
     erubi (1.10.0)
     execjs (2.7.0)
     ffi (1.15.0)
+    font-awesome-sass (5.15.1)
+      sassc (>= 1.11)
     fullcalendar-rails (3.9.0.0)
       jquery-rails (>= 4.0.5, < 5.0.0)
       jquery-ui-rails (>= 5.0.2)
@@ -285,6 +287,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   dotenv-rails
+  font-awesome-sass (~> 5.13)
   fullcalendar-rails
   jbuilder (~> 2.5)
   jquery-rails

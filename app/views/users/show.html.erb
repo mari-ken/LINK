@@ -1,6 +1,5 @@
-<div class="container-fluid">
-  <div class="row h-100">
-    <div class="col-xl-2" style="padding:0 0 0 60px">
+<div class="my-page">
+  <div class="left-box">
       <!-- ユーザー情報 -->
       <div class="mx-auto">
         <%= attachment_image_tag current_user, :image, format: 'jpeg', fallback: "no_image.jpg", size:'120x120', class: "user-image" %>
@@ -10,26 +9,29 @@
         </p>
         <div class="list-group list-group-flush" id="list-tab" role="tablist">
           <a class="list-group-item list-group-item-action active" data-toggle="list" href="#list-edit" role="tab">ユーザー情報編集</a>
-          <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-events">予定一覧</a>
           <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-follow">フォロー</a>
           <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-follower">フォロワー</a>
-          <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-users">ユーザー検索</a>
+          <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-rooms">ルーム一覧</a>
+          <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-users">ユーザー一覧</a>
         </div>
       </div>
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
     </div>
 
-    <div class="col-xl-4 room_li" style="padding:0">
+    <div class="center-box">
       <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="list-edit"><%= render 'users/edit', user: @user %></div>
-        <div class="tab-pane fade" id="list-events"><%= render 'users/event', events: @events %></div>
         <div class="tab-pane fade" id="list-follow"><%= render 'users/followings', followings: @followings %></div>
         <div class="tab-pane fade" id="list-follower"><%= render 'users/followers', followers: @followers %></div>
+        <div class="tab-pane fade" id="list-rooms"><%= render 'users/rooms', rooms: @rooms %></div>
         <div class="tab-pane fade" id="list-users"><%= render 'users/users', users: @users %></div>
       </div>
     </div>
 
-    <div class="col-xl-6">
-      <h2>カレンダー</h2>
+    <div class="right-box">
+      <div class="plan-page" id="list-events">
+        <%= render 'users/event', events: @events %>
+      </div>
       <div id="calendar"></div>
 
       <!-- モーダル -->
@@ -77,5 +79,4 @@
       </div>
 
     </div>
-  </div>
 </div>

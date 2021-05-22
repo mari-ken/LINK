@@ -6,6 +6,8 @@ class UsersController < ApplicationController
     @events = current_user.events.order(start: :asc)
     @followings = current_user.followings
     @followers = current_user.followers
+    @room = Room.new
+    @rooms = current_user.rooms
   end
 
   def edit

@@ -4,8 +4,6 @@ class EventsController < ApplicationController
   end
 
   def create
-    @room = Room.find(params[:id])
-    p @room
     @event = current_user.events.new(event_params)
     @event.save
     @events = current_user.events.order(start: :asc)

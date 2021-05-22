@@ -1,18 +1,10 @@
 class RoomsController < ApplicationController
-  def index
-    @rooms = current_user.rooms
-    @non_rooms = Room.where(id: UserRoom.where.not(user_id: current_user.id).pluck(:id))
-  end
-
-  def new
-    @room = Room.new
-  end
-
   def show
     @room = Room.find(params[:id])
-    @event = Event.new(room_id: @room.id)
     @chat = Chat.new(room_id: @room.id)
     @chats = @room.chats
+    @event = Event.new(room_id: @room.id)
+    @events = @room.events
   end
 
   def create
