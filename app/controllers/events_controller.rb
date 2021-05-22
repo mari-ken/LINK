@@ -4,8 +4,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(event_params)
-    @event.user_id = current_user.id
+    @event = current_user.events.new(event_params)
     @event.save
     @events = current_user.events.order(start: :asc)
   end
@@ -18,6 +17,6 @@ class EventsController < ApplicationController
 
   private
   def event_params
-    params.require(:event).permit(:title, :start, :end)
+    params.require(:event).permit(:title, :start, :end, :room_id)
   end
 end
