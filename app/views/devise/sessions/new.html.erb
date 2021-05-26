@@ -2,6 +2,13 @@
   <div class="mx-auto sign-up-box">
     <h2>ログイン</h2>
 
+    <% if @user.errors.any? %>
+    <%= @user.errors.count %>件のエラーが発生しました
+    <% @user.errors.full_messages.each do |message| %>
+      <%= message %>
+    <% end %>
+  <% end %>
+
     <%= form_with model: @user, url: user_session_path, local: true do |f| %>
       <%= f.email_field :email, autocomplete: "email", placeholder: "メールアドレス", class: "form-field" %>
 

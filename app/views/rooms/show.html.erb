@@ -4,95 +4,173 @@
       <div class="room-name"><%= link_to " マイページへ戻る", user_path(current_user.id), class: "fas fa-chevron-left" %></div>
     </div>
 
-    <div class="user-list">
-      <div style="margin-right:10px"><%= attachment_image_tag @room, :image, format: 'jpeg', fallback: "no_image.jpg", size:'50x50' %></div>
-      <div>
+    <div class="room-info">
+      <div class="room-setting">
         <div class="room-name"><%= @room.name %></div>
+        <button class="room-set-btn btn btn-outline-dark fas fa-cog" data-toggle="modal" data-target="#edit_room"></button>
       </div>
+      <div class="user-invite fas fa-user-plus btn btn-secondary" data-toggle="modal" data-target="#user-invite-page"> 招待</div>
     </div>
 
-    <% @room.users.each do |user| %>
-      <div class="user-list">
-        <div style="margin-right:10px"><%= attachment_image_tag user, :image, format: 'jpeg', fallback: "no_image.jpg", size:'50x50' %></div>
-        <div>
-          <div class="user-info"><%= user.name %></div>
-          <div style="color: #6e767d">ID:<%= user.public_uid %></div>
+    <div class="room-user-list-box">
+      <% @room.users.each do |user| %>
+        <div class="room-user-list">
+          <div style="margin-right:10px"><%= attachment_image_tag user, :image, format: 'jpeg', fallback: "no_image.jpg", size:'50x50' %></div>
+          <div>
+            <div class="user-info"><%= user.name %></div>
+            <div style="color: #6e767d">ID:<%= user.public_uid %></div>
+          </div>
         </div>
-      </div>
-    <% end %>
-
-    <div class="user-list">
-      <div class="room-name"><%= link_to "ルーム編集", edit_room_path(@room.id) %></div>
+      <% end %>
     </div>
   </div>
 
   <div class="center-boxx">
-    <%= form_with model: @chat do |f| %>
-      <%= f.text_field :message %>
-      <%= f.hidden_field :room_id %>
-      <%= f.submit %>
-    <% end %>
+    <nav class="navbar navbar-light bg-light">
+      <span class="navbar-text">
+        チャット
+      </span>
+    </nav>
 
-    <% @chats.each do |chat|%>
-      <div class="chats">
+    <div class="chats">
+      <% @chats.each do |chat|%>
         <div style="margin-right:10px"><%= attachment_image_tag chat.user, :image, format: 'jpeg', fallback: "no_image.jpg", size:'50x50' %></div>
         <div>
           <div><%= chat.user.name %></div>
           <div><%= chat.message %></div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form_with model: @chat do |f| %>
+        <%= f.text_field :message %>
+        <%= f.hidden_field :room_id %>
+        <%= f.submit %>
+      <% end %>
+    </div>
   </div>
 
-<div class="right-boxx">
+  <div class="right-boxx">
     <div class="plan-page" id="list-events">
-        <%= render 'users/event', events: @events %>
+      <%= render 'users/event', events: @events %>
+    </div>
+    <div id="calendar"></div>
+  </div>
+</div>
+
+<!-- イベント作成 -->
+<div class="modal" id="new_event" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">イベント追加</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-      <div id="calendar"></div>
-
-      <!-- モーダル -->
-      <div class="modal" id="new_event" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">イベント追加</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="form-group field">
-                <%= form_with(model: @event, remote: true) do |f| %>
-                  <div class="form-inputs">
-                    <div class="form-group">
-                      <%= f.label :title, "予定", class: "form-control-label"%>
-                      <div class="input-group" data-target-input="nearest">
-                        <%= f.text_field :title, class: "form-control"%>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <%= f.label :start, "開始時間", class: "form-control-label"%>
-                      <div class="input-group" data-target-input="nearest">
-                        <%= f.text_field :start, class: "form-control input-start"%>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <%= f.label :end, "終了時間", class: "form-control-label"%>
-                      <div class="input-group" data-target-input="nearest">
-                        <%= f.text_field :end, class: "form-control input-end"%>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="modal-footer actions">
-                    <%= f.hidden_field :room_id %>
-                    <%= f.submit "入力完了", class: "btn btn-primary" %>
-                  </div>
-                <% end %>
+      <div class="modal-body">
+        <div class="form-group field">
+          <%= form_with(model: @event, remote: true) do |f| %>
+            <div class="form-inputs">
+              <div class="form-group">
+                <%= f.label :title, "予定", class: "form-control-label"%>
+                <div class="input-group" data-target-input="nearest">
+                  <%= f.text_field :title, class: "form-control"%>
+                </div>
+              </div>
+              <div class="form-group">
+                <%= f.label :start, "開始時間", class: "form-control-label"%>
+                <div class="input-group" data-target-input="nearest">
+                  <%= f.text_field :start, class: "form-control input-start"%>
+                </div>
+              </div>
+              <div class="form-group">
+                <%= f.label :end, "終了時間", class: "form-control-label"%>
+                <div class="input-group" data-target-input="nearest">
+                  <%= f.text_field :end, class: "form-control input-end"%>
+                </div>
               </div>
             </div>
-          </div>
+            <div class="modal-footer actions">
+              <%= f.hidden_field :room_id %>
+              <%= f.submit "入力完了", class: "btn btn-primary" %>
+            </div>
+          <% end %>
         </div>
       </div>
+    </div>
+  </div>
 </div>
+
+<!-- ルーム編集モーダル -->
+<div class="modal" id="edit_room" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">ルーム設定</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group field">
+          <%= form_with model: @room, local: true do |f| %>
+            <div class="form-inputs">
+              <div class="field">
+                <%= f.label :name, "ルーム名" %><br />
+                <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-field" %>
+              </div>
+              <div class="field">
+                <%= f.label :image, "ルームアイコン" %><br />
+                <%= f.attachment_field :image, placeholder: "プロフィール画像", class: "form-field" %>
+              </div>
+            </div>
+            <div class="modal-footer actions">
+              <%= f.submit "入力完了", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 招待モーダル -->
+<div class="modal" id="user-invite-page" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">ユーザー招待</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="room-user-list-box">
+          <%= form_tag("/add_user_to_groups/invite") do %>
+            <% @invite_users.each do |user| %>
+              <div class="room-user-list">
+                <div style="margin-right:10px"><%= attachment_image_tag user, :image, format: 'jpeg', fallback: "no_image.jpg", size:'50x50' %></div>
+                <div>
+                  <div clasUs="user-info"><%= user.name %></div>
+                  <div style="color: #6e767d">ID:<%= user.public_uid %></div>
+                </div>
+                <div class="invite-check"><%= check_box "userlist", user.id %></div>
+              </div>
+            <% end %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <input type="submit" value="招待" class="btn btn-primary" id="invite_close">
+          <%= hidden_field_tag :room_id, @room.id %>
+        <% end %>
+      </div>
+      <script>
+        $('#invite_close').on('click', function() {
+          $('#user-invite-page').modal('hide');
+        });
+      </script>
+    </div>
+  </div>
 </div>

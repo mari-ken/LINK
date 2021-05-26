@@ -1,0 +1,15 @@
+<nav class="navbar navbar-light bg-light">
+  <span class="navbar-text">
+    招待一覧
+  </span>
+</nav>
+
+<% invites.each do |invite| %>
+<div class="user-list">
+  <div style="margin-right:10px"><%= attachment_image_tag invite.room, :image, format: 'jpeg', fallback: "no_image.jpg", size:'50x50' %></div>
+  <div class="room-name"><%= invite.room.name %></div>
+  <div class="follow-btn fas fa-check"></div>
+  <%= button_to "参加", {controller: 'add_user_to_groups', action: 'join', params: {room_id: invite.room_id, invite_id: invite.id}} %>
+  <%= link_to "", add_user_to_group_path(invite.id), method: :delete, "data-confirm" => "招待を拒否しますか？", class: "follow-btn far fa-times-circle" %>
+</div>
+<% end %>
