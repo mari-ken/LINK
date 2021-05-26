@@ -11,8 +11,9 @@
           <a class="list-group-item list-group-item-action active" data-toggle="list" href="#list-edit" role="tab">ユーザー情報編集</a>
           <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-follow">フォロー</a>
           <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-follower">フォロワー</a>
-          <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-rooms">ルーム一覧</a>
-          <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-users">ユーザー一覧</a>
+          <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-rooms">ルーム</a>
+          <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-invites">招待</a>
+          <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-users">ユーザー</a>
         </div>
       </div>
       <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
@@ -24,6 +25,7 @@
         <div class="tab-pane fade" id="list-follow"><%= render 'users/followings', followings: @followings %></div>
         <div class="tab-pane fade" id="list-follower"><%= render 'users/followers', followers: @followers %></div>
         <div class="tab-pane fade" id="list-rooms"><%= render 'users/rooms', rooms: @rooms %></div>
+        <div class="tab-pane fade" id="list-invites"><%= render 'users/invites', invites: @invites %></div>
         <div class="tab-pane fade" id="list-users"><%= render 'users/users', users: @users %></div>
       </div>
     </div>

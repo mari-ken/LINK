@@ -5,6 +5,10 @@ class RoomsController < ApplicationController
     @chats = @room.chats
     @event = Event.new(room_id: @room.id)
     @events = @room.events
+    invite_users = current_user.followings & current_user.followers # [1,2,3]
+    @invite_users_ids = invite_users.pluck('id') # [1,2,3]
+    @room_users_ids = @room.users.pluck('id') # [1,2]
+    @invite_users = User.where(id: (@invite_users_ids - @room_users_ids))
   end
 
   def create
@@ -29,6 +33,6 @@ class RoomsController < ApplicationController
 
   private
   def room_params
-    params.require(:room).permit(:name, :image)
+    params.require(:room).permit(:name, :password, :image)
   end
 end
