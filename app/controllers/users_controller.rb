@@ -5,7 +5,14 @@ class UsersController < ApplicationController
     @user = current_user
     @users = User.where.not(id: current_user.id) #自分以外のユーザーを取得
     @event = Event.new
-    @events = current_user.events.order(start: :asc) #開始日時が古い順にソート
+
+    @events = []
+    @events = current_user.events
+
+    current_user.rooms.each do |room|
+      @events << room.events
+    end
+
     @followings = current_user.followings
     @followers = current_user.followers
     @room = Room.new
@@ -14,6 +21,7 @@ class UsersController < ApplicationController
     user_invites = AddUserToGroup.all
     @invites = []
 
+    #自身に来ている招待を取得
     user_invites.each do |invite|
       if invite.user_id == current_user.id
         @invites << invite
@@ -32,6 +40,9 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    user = User.find(params[:id])
+    user.destroy
+    redirect_to root_path
   end
 
   private

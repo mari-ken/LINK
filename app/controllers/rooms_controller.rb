@@ -4,7 +4,13 @@ class RoomsController < ApplicationController
     @chat = Chat.new(room_id: @room.id)
     @chats = @room.chats
     @event = Event.new(room_id: @room.id)
-    @events = @room.events
+    @events = []
+    @events = current_user.events
+    current_user.rooms.each do |room|
+      @events << room.events
+    end
+
+    #相互フォローしているユーザーの内、ルームに未参加のユーザーのみ追加
     invite_users = current_user.followings & current_user.followers # [1,2,3]
     @invite_users_ids = invite_users.pluck('id') # [1,2,3]
     @room_users_ids = @room.users.pluck('id') # [1,2]

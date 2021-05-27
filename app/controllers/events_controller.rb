@@ -1,6 +1,11 @@
 class EventsController < ApplicationController
   def index
+    @events = []
     @events = current_user.events
+
+    current_user.rooms.each do |room|
+      @events << room.events
+    end
   end
 
   def create

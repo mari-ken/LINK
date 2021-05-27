@@ -8,5 +8,5 @@ class Room < ApplicationRecord
   has_many :users, through: :user_rooms
 
   validates :name, presence: true,
-                   length: { maximum: 20 }
+                   length: { maximum: 15 }
 end
