@@ -1,5 +1,5 @@
 <div class="room-page">
-  <div class="left-boxx">
+  <div class="left-box">
     <div class="user-list">
       <div class="room-name"><%= link_to " マイページへ戻る", user_path(current_user.id), class: "fas fa-chevron-left" %></div>
     </div>
@@ -7,9 +7,9 @@
     <div class="room-info">
       <div class="room-setting">
         <div class="room-name"><%= @room.name %></div>
-        <button class="room-set-btn btn btn-outline-dark fas fa-cog" data-toggle="modal" data-target="#edit_room"></button>
+        <button class="room-edit-btn btn btn-outline-dark fas fa-cog" data-toggle="modal" data-target="#edit_room"></button>
       </div>
-      <div class="user-invite fas fa-user-plus btn btn-secondary" data-toggle="modal" data-target="#user-invite-page"> 招待</div>
+      <div class="invite-btn fas fa-user-plus btn btn-secondary" data-toggle="modal" data-target="#user-invite-page"> 招待</div>
     </div>
 
     <div class="room-user-list-box">
@@ -25,35 +25,36 @@
     </div>
   </div>
 
-  <div class="center-boxx">
-    <nav class="navbar navbar-light bg-light">
-      <span class="navbar-text">
-        チャット
-      </span>
-    </nav>
-
-    <div class="chats">
+  <div class="center-box">
+    <div class="chat-room">
       <% @chats.each do |chat|%>
-        <div style="margin-right:10px"><%= attachment_image_tag chat.user, :image, format: 'jpeg', fallback: "no_image.jpg", size:'50x50' %></div>
-        <div>
-          <div><%= chat.user.name %></div>
-          <div><%= chat.message %></div>
+        <div class="chats">
+          <div style="margin-right:10px"><%= attachment_image_tag chat.user, :image, format: 'jpeg', fallback: "no_image.jpg", size:'50x50' %></div>
+          <div>
+            <div><%= chat.user.name %></div>
+            <div><%= chat.message %></div>
+          </div>
+          <div class="destroy-btn">
+            <% if chat.user == current_user %>
+              <%= link_to "", chat_path(chat), method: :delete, "data-confirm" => "本当に削除しますか？", class: "far fa-trash-alt", style: "color: #f00;" %>
+            <% end %>
+          </div>
         </div>
       <% end %>
-    </div>
 
-    <div>
-      <%= form_with model: @chat do |f| %>
-        <%= f.text_field :message %>
-        <%= f.hidden_field :room_id %>
-        <%= f.submit %>
-      <% end %>
+      <div class="chat-form">
+        <%= form_with model: @chat do |f| %>
+          <%= f.text_field :message, class: "chat-form-field" %>
+          <%= f.hidden_field :room_id %>
+          <%= f.submit '送信', class: "btn btn-success" %>
+        <% end %>
+      </div>
     </div>
   </div>
 
-  <div class="right-boxx">
-    <div class="plan-page" id="list-events">
-      <%= render 'users/event', events: @events %>
+  <div class="right-box">
+    <div class="event-page" id="list-events">
+      <%= render 'users/events', events: @events %>
     </div>
     <div id="calendar"></div>
   </div>

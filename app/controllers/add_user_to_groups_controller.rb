@@ -11,7 +11,7 @@ class AddUserToGroupsController < ApplicationController
     current_user.user_rooms.create(room_id: params[:room_id])
     invite = AddUserToGroup.find(params[:invite_id])
     invite.destroy
-    redirect_to user_path(current_user.id)
+    redirect_to room_path(params[:room_id])
   end
 
   def destroy

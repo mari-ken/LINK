@@ -6,6 +6,10 @@ class ChatsController < ApplicationController
   end
 
   def destroy
+    room = Chat.find(params[:id]).room
+    chat = Chat.find(params[:id])
+    chat.destroy
+    redirect_to room_path(room.id)
   end
 
   private

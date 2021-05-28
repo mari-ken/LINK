@@ -28,10 +28,10 @@ class User < ApplicationRecord
   generate_public_uid generator: PublicUid::Generators::HexStringSecureRandom.new(6)
   attachment :image
 
-  has_many :user_rooms
-  has_many :chats
-  has_many :add_user_to_groups
-  has_many :events
+  has_many :user_rooms, dependent: :destroy
+  has_many :chats, dependent: :destroy
+  has_many :add_user_to_groups, dependent: :destroy
+  has_many :events, dependent: :destroy
   has_many :rooms, through: :user_rooms
 
   validates :name, presence: true,

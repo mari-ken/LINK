@@ -4,26 +4,20 @@
   </span>
 </nav>
 
-<div class="mypage-center">
+<div class="user_edit">
   <%= form_with model: user, local: true do |f| %>
     <%= f.label :アイコン %><br />
-    <%= attachment_image_tag user, :image, fallback: "no_image.jpg", size:'120x120', class: "icon-edit" %><br />
-    <%= f.attachment_field :image, placeholder: "プロフィール画像", class: "icon-edit" %>
+    <%= attachment_image_tag user, :image, fallback: "no_image.jpg", size:'120x120', class: "icon" %><br />
+    <%= f.attachment_field :image, placeholder: "プロフィール画像", class: "icon" %>
 
-    <div class="field">
-      <%= f.label :名前 %><br />
-      <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "ユーザー名(4〜15文字)", class: "form-field" %>
-    </div>
+    <%= f.label :名前 %><br />
+    <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "ユーザー名(4〜15文字)", class: "form-field" %>
 
-    <div class="field">
-      <%= f.label :メールアドレス %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス", class: "form-field" %>
-    </div>
+    <%= f.label :メールアドレス %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス", class: "form-field" %>
 
     <%= f.submit "保存", class: "btn btn-dark btn-lg rounded-pill col-12 create-btn" %>
   <% end %>
 
-  <div class="actions">
-    <%= link_to "退会する", user_path(current_user.id), method: :delete, "data-confirm" => "本当に退会しますか？", class: "event-destroy", style: "color: #f00;" %>
-  </div>
+  <%= link_to "退会する", user_path(current_user.id), method: :delete, "data-confirm" => "本当に退会しますか？", class: "destroy-btn", style: "color: #f00;" %>
 </div>
