@@ -25,7 +25,7 @@
     </div>
   </div>
 
-  <div class="center-box">
+  <div class="center-box  overflow-auto">
     <div class="chat-room">
       <% @chats.each do |chat|%>
         <div class="chats">
@@ -53,7 +53,7 @@
   </div>
 
   <div class="right-box">
-    <div class="event-page" id="list-events">
+    <div class="event-page overflow-auto" id="list-events">
       <%= render 'users/events', events: @events %>
     </div>
     <div id="calendar"></div>
@@ -126,6 +126,7 @@
                 <%= f.label :image, "ルームアイコン" %><br />
                 <%= f.attachment_field :image, placeholder: "プロフィール画像", class: "form-field" %>
               </div>
+                <%= link_to "ルームを削除", room_path(@room.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "destroy-btn", style: "color: #f00;" %>
             </div>
             <div class="modal-footer actions">
               <%= f.submit "入力完了", class: "btn btn-primary" %>
